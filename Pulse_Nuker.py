@@ -10,6 +10,7 @@ def randomletters(length):
     return ''.join(random.choice(letters) for i in range(length))
 
 TOKEN = ("")
+global TEST
 TEST = 0
 
 client=discord.Client(intents=discord.Intents.all())
