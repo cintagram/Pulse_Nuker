@@ -10,14 +10,15 @@ def randomletters(length):
     return ''.join(random.choice(letters) for i in range(length))
 
 TOKEN = ("")
-global TEST
-TEST = 0
+
 
 client=discord.Client(intents=discord.Intents.all())
 
 
 @client.event
 async def on_ready():
+    global TEST
+    TEST = 0
     print("Pulse_Nuker v1.1 is running.\nInvite your bot and send any message to start nuke.\n\n")
     print("WARNING!!\nYou may get API Timeout from Discord server if you nuke long.\nPlease Use wisely.")
     return await client.change_presence(activity=discord.Game(name='Pulse_Nuker v1.1'))
