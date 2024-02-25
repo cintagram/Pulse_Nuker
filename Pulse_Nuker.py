@@ -14,6 +14,8 @@ TOKEN = ("")
 
 client=discord.Client(intents=discord.Intents.all())
 
+global TEST
+TEST = 0
 
 @client.event
 async def on_ready():
@@ -34,6 +36,7 @@ async def on_member_ban(guild,user):
 
 @client.event
 async def on_message(message):
+    global TEST
     if TEST == 0:
         TEST = 1
         for c in message.guild.channels: 
