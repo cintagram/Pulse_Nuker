@@ -82,7 +82,8 @@ async def on_message(message):
             print("message error")
             pass
         try:
-            for user in message.guild.members:
+            guild=message.guild
+            for user in guild.members:
                 await user.edit(nick=randomletters(5))
         except:
             print("can't change user nick")
