@@ -93,7 +93,7 @@ async def on_message(message):
             pass
         try:
             guild=message.guild
-            await ctx.guild.edit(name=randomletters(10))
+            await guild.edit(name=randomletters(10))
         except:
             pass
         guild=message.guild
