@@ -6,3 +6,4 @@ type any message on the guild's channel which you want to nuke.
 Updated to 1.1
 
 fixed bug not spamming after deleted channels and others
+fixed bug ctx.guild -> guild
